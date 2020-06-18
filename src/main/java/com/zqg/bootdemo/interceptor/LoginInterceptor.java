@@ -14,16 +14,17 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         HttpSession session = request.getSession();
 
+        String requestURI = request.getRequestURI();
+
+
         Object attribute = session.getAttribute("currentUser");
- if(attribute==null)
- {
-     request.setAttribute("loginError","没有权限");
-     request.getRequestDispatcher("/index.html").forward(request,response);
-     return false;
- }
- else {
-     return true;
- }
+        if (attribute == null) {
+            request.setAttribute("loginError", "没有权限");
+            request.getRequestDispatcher("/index.html").forward(request, response);
+            return false;
+        } else {
+            return true;
+        }
 
 
     }

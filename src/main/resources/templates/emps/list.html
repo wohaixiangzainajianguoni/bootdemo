@@ -88,16 +88,25 @@
 								<td th:text="${employee.email}"></td>
 								<td th:text="${employee.gender}==0?'女':'男'"></td>
 								<td th:text="${employee.department.departmentName}"></td>
-								<td th:text="${#dates.format(employee.birth,'yyyy-MM--dd HH:mm')}"></td>
+								<td th:text="${#dates.format(employee.birth,'yyyy-MM-dd HH:mm')}"></td>
 								<td>
-									<button class="btn btn-sm btn-primary">删除</button>
-									<button class="btn btn-sm btn-danger">删除</button>
+									<a th:href="@{/employee/toEdit/}+${employee.id}" class="btn btn-sm btn-primary">修改</a>
+									<button th:attr="del_url=@{/employee/emp/}+${employee.id}"
+									class="btn btn-sm btn-danger deleteBtn"
+									>删除</button>
+
 								</td>
 							</tr>
 							</tbody>
 						</table>
 					</div>
 				</main>
+
+				<form id="deleteForm" method="post">
+					<input type="hidden" name="_method" value="delete">
+
+				</form>
+
 			</div>
 		</div>
 
@@ -105,26 +114,48 @@
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script type="text/javascript"
-				th:src="@{/static/asserts/js/jquery-3.2.1.slim.min.js}"
+				th:src="@{/asserts/js/jquery-3.2.1.slim.min.js}"
 
 
 		></script>
-		<script type="text/javascript" th:src="@{/static/asserts/js/popper.min.js}"
+		<script type="text/javascript" th:src="@{/asserts/js/popper.min.js}"
 
 		></script>
-		<script type="text/javascript" th:src="@{../../static/asserts/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/asserts/js/bootstrap.min.js}"></script>
 
 		<!-- Icons -->
 		<script type="text/javascript"
 
-				th:src="@{/static/asserts/js/feather.min.js}"></script>
+				th:src="@{/asserts/js/feather.min.js}"></script>
 		<script>
 			feather.replace()
 		</script>
 
 		<!-- Graphs -->
 		<script type="text/javascript"
-				th:src="@{/static/asserts/js/Chart.min.js}"></script>
+				th:src="@{/asserts/js/Chart.min.js}"></script>
+
+<script>
+	$(function () {
+
+		$(".deleteBtn").on("click",function(){
+			alert($(this).attr("del_url"));
+			$("#deleteForm").attr("action",$(this).attr("del_url")).submit();
+
+		})
+		// $(".deleteBtn").click(function () {
+		//
+		// 	$('#deleteForm').attr("action",$(this).attr("del_url").submit())
+		// });
+
+
+
+
+	})
+
+</script>
+
+
 		<script>
 			var ctx = document.getElementById("myChart");
 			var myChart = new Chart(ctx, {

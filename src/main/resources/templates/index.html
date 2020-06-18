@@ -28,7 +28,7 @@
 			<input type="text" name="Username" class="form-control" placeholder="Username" required="" autofocus="">
 			<label class="sr-only">Password</label>
 <!--			 当msg 不为空的时候才生成当前的llabel标签-->
-			<label th:text="${loginError}" th:if="${not #strings.isEmpty(loginError)}"></label>
+			<label style="color: red" th:text="${loginError}" th:if="${not #strings.isEmpty(loginError)}"></label>
 			<input type="password" name="Password" class="form-control" placeholder="Password" required="">
 			<div class="checkbox mb-3">
 				<label>

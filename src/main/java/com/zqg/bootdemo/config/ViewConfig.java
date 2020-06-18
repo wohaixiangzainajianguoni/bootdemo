@@ -29,7 +29,7 @@ public class ViewConfig {
 
                 registry.addInterceptor(new LoginInterceptor()
                 ).addPathPatterns("/**").excludePathPatterns("/").
-                        excludePathPatterns("/index.html","/","/user/login")
+                        excludePathPatterns("/index.html","/","/user/login","/asserts/**")
 
                 ;
             }
