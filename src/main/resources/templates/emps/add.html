@@ -124,7 +124,9 @@ th:value="${dept.id}" th:each="dept:${depts}" th:text="${dept.departmentName}">1
 								   th:value="${emp!=null}?${#dates.format(emp.birth,'yyyy/MM/dd HH:mm')}"
 								   class="form-control" placeholder="zhangsan" >
 						</div>
-						<button type="submit" class="btn btn-primary" >添加</button>
+						<button type="submit" class="btn btn-primary"
+						 th:text="${emp==null}?'添加':'修改'"
+						></button>
 					</form>
 				</main>
 			</div>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zqg.bootdemo.mapper.EmployeeMapper">
+
+    <insert id="insertEmployee" parameterType="com.zqg.bootdemo.entities.Employee">
+
+        <selectKey order="AFTER" keyColumn="id" keyProperty="id" resultType="int">
+            select LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO employee ( lastName, email, gender, birth, department_id)
+        VALUES (#{lastName},#{email}, #{gender}, #{birth}, #{department.id})
+    </insert>
+
+    <update id="updateEmployee" parameterType="com.zqg.bootdemo.entities.Employee">
+
+   update  employee set         lastName=#{lastName},
+   email=#{email}, gender=#{gender}, birth=#{birth},
+    department_id=#{department.id} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from employee  where id =#{id}
+    </delete>
+
+    <select id="get" parameterType="int" resultMap="employeeMap">
+        select id,lastName, email, gender, birth, department_id from employee  where id=#{id}
+    </select>
+
+    <resultMap id="employeeMap" type="com.zqg.bootdemo.entities.Employee">
+        <id column="id" property="id"></id>
+        <result column="lastName" property="lastName" ></result>
+        <result column="email" property="email"></result>
+        <result column="gender" property="gender"></result>
+        <result column="birth" property="birth"></result>
+        <association property="department" column="department_id" select="com.zqg.bootdemo.mapper.DepartmentMapper.selectDepartmentById">
+
+        </association>
+
+
+
+    </resultMap>
+
+    <select id="getAll" resultMap="employeeMap">
+ select id,lastName, email, gender, birth, department_id from employee
+
+
+    </select>
+
+
+</mapper>
+
